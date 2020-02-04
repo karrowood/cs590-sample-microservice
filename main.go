@@ -30,7 +30,7 @@ func random_user(c *gin.Context) {
 	if len(users) > 0 {
 		user := users[rand.Intn(len(users))]
 		c.JSON(http.StatusOK, gin.H{
-			"random user": gin.H{
+			"user": gin.H{
 				"Id": user.Id,
 				"Username": user.Username,
 				"Email": user.Email,
@@ -41,7 +41,7 @@ func random_user(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusBadRequest, gin.H{
-		"random user": gin.H{
+		"user": gin.H{
 			"Id": -1,
 		},
 		"message": "No users exist",
@@ -81,7 +81,7 @@ func get_user(c *gin.Context) {
 	if len(users) > id && err == nil {
 		user := users[id]
 		c.JSON(http.StatusOK, gin.H{
-			"random user": gin.H{
+			"user": gin.H{
 				"Id": user.Id,
 				"Username": user.Username,
 				"Email": user.Email,
@@ -92,7 +92,7 @@ func get_user(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusBadRequest, gin.H{
-		"random user": gin.H{
+		"user": gin.H{
 			"Id": -1,
 		},
 		"message": "No users exist",
