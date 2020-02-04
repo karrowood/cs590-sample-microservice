@@ -55,7 +55,7 @@ func add_user(c *gin.Context) {
 
 	if len(username) > 0 && len(email) > 0 && len(address) > 0 {
 		newuser := User{
-			Id: len(users) + 1,
+			Id: len(users),
 			Username: username,
 			Email: email,
 			Address: address,
