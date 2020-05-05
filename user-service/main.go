@@ -4,14 +4,15 @@ import (
 	"math/rand"
 	"net/http"
 	"strconv"
+
 	"github.com/gin-gonic/gin"
 )
 
 type User struct {
-	Id int
+	Id       int
 	Username string
-	Email string
-	Address string
+	Email    string
+	Address  string
 }
 
 var users []User
@@ -19,22 +20,22 @@ var users []User
 func main() {
 	router := gin.Default()
 
-	router.GET("/randomuser", random_user)
-	router.GET("/getuser/:id", get_user)
-	router.POST("/adduser", add_user)
+	router.GET("/randomuser", randomUser)
+	router.GET("/getuser/:id", getUser)
+	router.POST("/adduser", addUser)
 
 	router.Run(":8080")
 }
 
-func random_user(c *gin.Context) {
+func randomUser(c *gin.Context) {
 	if len(users) > 0 {
 		user := users[rand.Intn(len(users))]
 		c.JSON(http.StatusOK, gin.H{
 			"user": gin.H{
-				"Id": user.Id,
+				"Id":       user.Id,
 				"Username": user.Username,
-				"Email": user.Email,
-				"Address": user.Address,
+				"Email":    user.Email,
+				"Address":  user.Address,
 			},
 		})
 		return
@@ -48,21 +49,21 @@ func random_user(c *gin.Context) {
 	})
 }
 
-func add_user(c *gin.Context) {
+func addUser(c *gin.Context) {
 	username := c.PostForm("username")
 	email := c.PostForm("email")
 	address := c.PostForm("address")
 
 	if len(username) > 0 && len(email) > 0 && len(address) > 0 {
 		newuser := User{
-			Id: len(users),
+			Id:       len(users),
 			Username: username,
-			Email: email,
-			Address: address,
+			Email:    email,
+			Address:  address,
 		}
 		users = append(users, newuser)
 
-		msg := "Created user "+username+" ("+strconv.Itoa(newuser.Id)+") with email "+email+" and address "+address
+		msg := "Created user " + username + " (" + strconv.Itoa(newuser.Id) + ") with email " + email + " and address " + address
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "success",
 			"message": msg,
@@ -75,17 +76,17 @@ func add_user(c *gin.Context) {
 	}
 }
 
-func get_user(c *gin.Context) {
+func getUser(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
-	
+
 	if len(users) > id && err == nil {
 		user := users[id]
 		c.JSON(http.StatusOK, gin.H{
 			"user": gin.H{
-				"Id": user.Id,
+				"Id":       user.Id,
 				"Username": user.Username,
-				"Email": user.Email,
-				"Address": user.Address,
+				"Email":    user.Email,
+				"Address":  user.Address,
 			},
 		})
 		return
