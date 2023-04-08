@@ -24,8 +24,7 @@ func getDoge(c *gin.Context) {
 			"Error": err.Error(),
 		},
 		)
-	}
-	else {
+	} else {
 		out, err := ioutil.ReadAll(response.Body)
 		if err != nil {
 			c.JSON(http.StatusOK, gin.H{
