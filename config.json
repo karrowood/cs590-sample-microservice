@@ -30,6 +30,17 @@
 					}
 				],
 				"command": ["./main"]
+			},
+			{
+				"name": "doge-service",
+				"image": "doge-service:latest",
+				"imagePullPolicy": "IfNotPresent",
+				"ports": [
+					{
+						"containerPort": 8082
+					}
+				],
+				"command": ["./main"]
 			}
 		]
 	}
