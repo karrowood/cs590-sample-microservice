@@ -15,7 +15,6 @@ func main() {
 }
 
 func getDoge(c *gin.Context) {
-	currentTime := time.Now()
 	// https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd
 	response, err := http.Get("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd")
 
